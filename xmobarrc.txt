@@ -1,0 +1,66 @@
+-- xmobar configuration file
+--
+-- author: daniel cicala
+
+Config {
+
+  -- set the font, borders + color,
+  -- background + foreground color
+  font = "xft:OpenDyslexic:size=10"
+  , borderColor = "black"
+  , border = BottomB
+  , bgColor = "black"
+  , fgColor = "purple"
+
+  -- set xmobar position. tweak it to play nicely with
+  -- the stalonetray
+  , position = TopW L 100
+
+  -- when and where to see xmobar
+  , hideOnStart = False
+  , allDesktops = True
+  , persistent = True
+
+  -- list commands to collect system info
+  -- to present in the bar
+  , commands = [
+
+  -- Run Com "myvolume" [] "~/.xmonad/get-volume.sh" 10
+  -- Run Com "bash" ["~/.xmonad/get-volume.sh"] "myvolume" 10
+  -- Run Com "/bin/bash" ["-c", "echo `xbacklight -get | grep -oE '^.[0-9]{0,3}'`%"]
+  -- Run Volume "default" [] "Master" 10
+  -- Run Com "python" ["/.xmonad/show-volume.py"] "vol" 10
+  
+  -- battery info, tweak per machine, disable for desktop
+  Run Battery [ "-t", "<acstatus>: <left>% - <timeleft>" , "--" , "-O", "AC" , "-o", "Bat" , "-h", "green" , "-l", "red" ] 10
+
+  -- about hard cabled networks? it's on most config
+  -- files online, so leave it here for now
+  -- ...
+  -- , Run Network "eth0" ["-L","0", "-H","32", "--normal","green", "--high","red"] 10 , Run Network
+  -- "eth1" ["-L","0", "-H","32", "--normal", "green", "--high","red"] 10
+
+   -- how hard is the computer working and what memory's left
+   -- I don't care enough to include it in the bar
+   -- but I'll keep it here in case I do in the future
+   -- ...
+   -- , Run Cpu ["-L","3", -- "-H","50",
+   -- "--normal","green", -- "--high","red"] 10
+   -- , Run Memory ["-t","Mem: <usedratio>%"] 10
+     
+   --date format
+   , Run Date "%a %d %b %Y %H:%M:%S" "date" 10
+
+   -- standard input reader, whatever that means
+   , Run StdinReader
+   ]
+
+  -- alignment character for template             
+  , sepChar = "%"
+
+  -- splits left hand side from right
+  , alignSep = "}{"
+
+  -- lays out contents in the bar
+  , template = "%StdinReader%  }{ %battery% // <fc=orange>%date%</fc> "
+  }
